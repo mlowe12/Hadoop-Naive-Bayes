@@ -6,6 +6,7 @@ import org.apache.hadoop.conf.*;
 import org.apache.hadoop.mapreduce.*;  
 
 
+
 public class WordMap{
 
     public static class Map extends Mapper<LongWritable, Text, Text, IntWritable>{

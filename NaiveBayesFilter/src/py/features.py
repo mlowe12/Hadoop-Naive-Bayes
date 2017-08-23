@@ -25,11 +25,16 @@ def extractFeatures(dataframe):
 
 
 def assignPath(dataframe1, dataframe2):
-    _SPAMPATH = os.path.join(os.path.dirname(__file__), '..\\..\\resources\\spam.csv') 
-    _HAMPATH = os.path.join(os.path.dirname(__file__), '..\\resources\\ham.csv')
+    localpath1 = '../../resources/spam.csv'
+    localpath2 = '../../resources/ham.csv'
+    _GOODSET = os.path.abspath(os.path.dirname(__file__) + str(localpath1))
+    _BADSET = os.path.abspath(os.path.dirname(__file__) + str(localpath2))
     if(dataframe1 and dataframe2 != None):
-        dataframe1.to_csv(_SPAMPATH)
-        dataframe2.to_csv(_HAMPATH)
+        dataframe1.to_csv(_GOODSET)
+        dataframe2.to_csv(_BADSET)
         return True
     else:
-        return False 
+        return False
+
+testpath = '/test1/test2'
+print(os.path.abspath(os.path.dirname(__file__)) + str(testpath))

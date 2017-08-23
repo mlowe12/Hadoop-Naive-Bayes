@@ -1,0 +1,9 @@
+ rex mode=sed "s/(\.|,|;|{|}|:|%|\\\|&|\*|$|=|\"|'|\[|\]| -|!|^-)/ /g" 
+| eval word=_raw 
+| makemv delim=" " word 
+| mvexpand word
+| regex word = ("\w")
+| eval word = trim(word)
+| stats count as cnt by word
+| eval length = len(word)
+| table word, length, cnt| where !isnum(word) AND len(word) > 3| sort -cnt cnt
