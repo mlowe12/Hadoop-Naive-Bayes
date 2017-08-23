@@ -1,6 +1,7 @@
 import os, os.path
 import pandas as pd
 import numpy as np
+import logging
 import re
 
 ''' 
@@ -22,7 +23,7 @@ class Unit:
     def setClassification(self,classification):
         try:
             if(classification != None):
-                str(self.classification) = classification
+                self.classification = classification
         except TypeError:
             logging.exception("Invalid classification")
         return
@@ -50,8 +51,10 @@ class Unit:
     def tokenizeByWord(_list):
         arr = []
         for i in range(len(_list)):
-            element = re.search("\w+",list[i]).group(0)
+            element = re.search("\w+",_list[i]).group(0)
             arr.append(str(element))
-    return arr
+        return arr
 
+    def exportToMapReduce(_list):
+        return
 
