@@ -56,10 +56,10 @@ class Unit:
         return arr
 
     def exportToMapReduce(self):
-        self.setDataFrame(self.filepath)
-        temp = self.tokenizeBySentence(self.dataframe)
-        self.tokenizeByWord(list(temp))
-        _list = np.array(_list)
-        np.savetxt( _list, delimiter=',')
+        self.setDataframe(self.filepath)
+        temp_sent = self.tokenizeBySentence(self.dataframe)
+        temp_list = self.tokenizeByWord(list(temp_sent))
+        temp_list = np.array(temp_list)
+        np.savetxt(temp_list, delimiter=',')
         return
 
