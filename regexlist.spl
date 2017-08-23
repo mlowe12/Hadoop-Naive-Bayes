@@ -1,9 +1,5 @@
- rex mode=sed "s/(\.|,|;|{|}|:|%|\\\|&|\*|$|=|\"|'|\[|\]| -|!|^-)/ /g" 
-| eval word=_raw 
-| makemv delim=" " word 
-| mvexpand word
-| regex word = ("\w")
-| eval word = trim(word)
-| stats count as cnt by word
-| eval length = len(word)
-| table word, length, cnt| where !isnum(word) AND len(word) > 3| sort -cnt cnt
+# data preprocessing 
+# strip out all non alpha numeric characters
+r"[^&^!@#$%^&*()_\-+=|/\\<>?'\";:\[\]{}`~.]+"g
+# parse tokens by whitespace separator
+r"\w+"g
