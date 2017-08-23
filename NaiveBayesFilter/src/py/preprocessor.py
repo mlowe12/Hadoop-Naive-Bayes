@@ -28,7 +28,7 @@ class Unit:
             logging.exception("Invalid classification")
         return
 
-    def setDataframe(dataframe):
+    def setDataframe(self, dataframe):
         self.dataframe = dataframe
         return
 
@@ -36,7 +36,7 @@ class Unit:
         > Process strips all non-alphanumeric characters from parsed sequences and returns raw text list of all sentences
     '''
 
-    def tokenizeBySentence(dataframe):
+    def tokenizeBySentence(self, dataframe):
         headers = list(dataframe.columns)
         row, col = dataframe.shape
         arr = []
@@ -48,14 +48,14 @@ class Unit:
     Tokenizes entire class of logs into single word entities. 
     > Will be fed into MapReduce to get total word count
     '''
-    def tokenizeByWord(_list):
+    def tokenizeByWord(self, _list):
         arr = []
         for i in range(len(_list)):
             element = re.search("\w+",_list[i]).group(0)
             arr.append(str(element))
         return arr
 
-    def exportToMapReduce():
+    def exportToMapReduce(self):
         self.setDataFrame(self.filepath)
         temp = self.tokenizeBySentence(self.dataframe)
         self.tokenizeByWord(list(temp))
