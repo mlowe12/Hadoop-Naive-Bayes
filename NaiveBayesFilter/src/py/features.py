@@ -27,7 +27,7 @@ def extractFeatures(dataframe):
 def assignPath(dataframe1, dataframe2):
     localpath1 = '../../resources/spam.csv'
     localpath2 = '../../resources/ham.csv'
-    _GOODSET = os.path.abspath(os.path.dirname(__file__) + str(localpath1))
+    _GOODSET = os.path.abspath(os.path.dirname(__file__) + str(localpath1))`
     _BADSET = os.path.abspath(os.path.dirname(__file__) + str(localpath2))
     if(dataframe1 and dataframe2 != None):
         dataframe1.to_csv(_GOODSET)

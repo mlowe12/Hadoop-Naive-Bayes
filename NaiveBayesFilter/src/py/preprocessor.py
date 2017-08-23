@@ -19,7 +19,7 @@ class Unit:
         self.dataframe = None
         self.features = None
         self.classification = None
-    
+        self.absPath = os.path.abspath(os.path.dirname(__file__))
     def setClassification(self,classification):
         try:
             if(classification != None):
@@ -55,6 +55,11 @@ class Unit:
             arr.append(str(element))
         return arr
 
-    def exportToMapReduce(_list):
+    def exportToMapReduce():
+        self.setDataFrame(self.filepath)
+        temp = self.tokenizeBySentence(self.dataframe)
+        self.tokenizeByWord(list(temp))
+        _list = np.array(_list)
+        np.savetxt( _list, delimiter=',')
         return
 

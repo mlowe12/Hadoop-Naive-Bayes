@@ -11,16 +11,17 @@ class UnitTest:
         self.dataframe1 = dataframe1
         self.dataframe2 = dataframe2
         self.instanceID = instanceID
+        self.passed = False
    
     def assertDataframe(self,filepath, filename):
         if(filepath != None or len(filepath) > 0):
             try:
                 dataframe = pd.read_csv(str(filepath))
                 temp_cols = dataframe.columns
-
-
+                self.passed = True
             except FileNotFoundError:
                 logging.exception("FILE NOT FOUND dir = %s filename = %s \n", filepath, filepath[len(filename)])
+                self.passed = False
             
                 
                 
