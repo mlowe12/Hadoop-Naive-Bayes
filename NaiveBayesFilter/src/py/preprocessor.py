@@ -20,6 +20,7 @@ class Unit:
         self.features = None
         self.classification = None
         self.absPath = os.path.abspath(os.path.dirname(__file__))
+
     def setClassification(self,classification):
         try:
             if(classification != None):
@@ -28,20 +29,17 @@ class Unit:
             logging.exception("Invalid classification")
         return
 
-    def setDataframe(self, dataframe):
-        self.dataframe = dataframe
-        return
-
     '''Takes entire parent dataframe and breaks it into tokenized sentences per log entry from Splunk
         > Process strips all non-alphanumeric characters from parsed sequences and returns raw text list of all sentences
     '''
 
-    def tokenizeBySentence(self, dataframe):
-        headers = list(dataframe.columns)
-        row, col = dataframe.shape
+    def tokenizeBySentence(self):
+        self.dataframe = pd.read_csv(self.filepath)
+        headers = list(self.dataframe.columns)
+        row, col = self.dataframe.shape
         arr = []
         for i in range(row):
-            temp = str(dataframe[headers[0]][i])
+            temp = str(self.dataframe[headers[0]][i])
             arr.append((re.search("[^&^!@#$%^&*()_\-+=|/\\<>?'\";:\[\]{}`~.]+", str(temp)).group(0)))
         return arr
     '''
@@ -55,11 +53,18 @@ class Unit:
             arr.append(str(element))
         return arr
 
-    def exportToMapReduce(self):
-        self.setDataframe(self.filepath)
-        temp_sent = self.tokenizeBySentence(self.dataframe)
-        temp_list = self.tokenizeByWord(list(temp_sent))
-        temp_list = np.array(temp_list)
-        np.savetxt(temp_list, delimiter=',')
+    def exportToMapReduce(self, localpath):
+        temp_filepath = self.absPath + localpath
+        temp_sent = self.tokenizeBySentence()
+        temp_list = pd.DataFrame(self.tokenizeByWord(list(temp_sent)))
+        temp_list[temp_list.columns[0]].to_csv(temp_filepath)
         return
 
+    def unitTest(self,testcases):
+        testcases = pd.read_csv(os.path.abspath(os.path.dirname(__file__)) +"/../..resources/tests/unit_test.csv")
+        test_filepath = self.absPath + 
+
+
+
+test = Unit("/Users/michaellowe/Downloads/raw-spam.csv")
+test.exportToMapReduce()
