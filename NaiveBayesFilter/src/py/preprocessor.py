@@ -60,11 +60,17 @@ class Unit:
         temp_list[temp_list.columns[0]].to_csv(temp_filepath)
         return
 
-    def unitTest(self,testcases):
-        testcases = pd.read_csv(os.path.abspath(os.path.dirname(__file__)) +"/../..resources/tests/unit_test.csv")
-        test_filepath = self.absPath + 
+    
+    def unitTest(self):
+        # will read series of test cases from a giant csv file in future. 
+        #testcases = pd.read_csv(os.path.abspath(os.path.dirname(__file__)) +"/../../resources/tests/raw-spam.csv")
+        test_filepath = "/../../resources/tests/raw-spam.csv"
+        self.exportToMapReduce(str(test_filepath))
+
+
+
 
 
 
 test = Unit("/Users/michaellowe/Downloads/raw-spam.csv")
-test.exportToMapReduce()
+test.unitTest()
