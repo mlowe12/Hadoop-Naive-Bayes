@@ -72,5 +72,5 @@ class Unit:
 
 
 
-test = Unit("/Users/michaellowe/Downloads/raw-spam.csv")
-test.unitTest()
+# test = Unit("~/Downloads/raw-spam.csv")
+# test.unitTest()
